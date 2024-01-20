@@ -53,6 +53,10 @@ func (l *Line3) Center(optionalTarget *Vector3) *Vector3 {
 	return result.AddVectors(&l.start, &l.end).MultiplyScalar(0.5)
 }
 
+func (l *Line3) Get() (*Vector3, *Vector3) {
+	return &l.start, &l.end
+}
+
 // Delta calculates the vector from the start to end point of this line segment.
 // Store its pointer in optionalTarget, if not nil, and also returns it.
 func (l *Line3) Delta(optionalTarget *Vector3) *Vector3 {

@@ -74,6 +74,13 @@ func (v *Vector3) SetComponent(index int, value float32) {
 	}
 }
 
+func (v *Vector3) Abs() *Vector3 {
+	v.X = Abs(v.X)
+	v.Y = Abs(v.Y)
+	v.Z = Abs(v.Z)
+	return v
+}
+
 // Component returns this vector component by its index: 0 for X, 1 for Y, 2 for Z.
 func (v *Vector3) Component(index int) float32 {
 

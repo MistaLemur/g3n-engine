@@ -31,6 +31,10 @@ func (p *Plane) Set(normal *Vector3, constant float32) *Plane {
 	return p
 }
 
+func (p *Plane) GetNormal() *Vector3 {
+	return &p.normal
+}
+
 // SetComponents sets this plane normal vector components and constant.
 // Returns pointer to this updated plane.
 func (p *Plane) SetComponents(x, y, z, w float32) *Plane {
