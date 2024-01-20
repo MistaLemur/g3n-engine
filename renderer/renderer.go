@@ -215,6 +215,8 @@ func (r *Renderer) classifyAndCull(inode core.INode, frustum *math32.Frustum, zL
 	if !inode.Visible() {
 		return
 	}
+
+	drawChildren := true
 	// If node is an IPanel append it to appropriate list
 	if ipan, ok := inode.(gui.IPanel); ok {
 		zLayer += ipan.ZLayerDelta()
@@ -240,6 +242,8 @@ func (r *Renderer) classifyAndCull(inode core.INode, frustum *math32.Frustum, zL
 				if frustum.IntersectsBox(&bb) {
 					// Append graphic to list of graphics to be rendered
 					r.graphics = append(r.graphics, gr)
+				} else {
+					drawChildren = false
 				}
 			} else {
 				// Append graphic to list of graphics to be rendered
@@ -269,8 +273,10 @@ func (r *Renderer) classifyAndCull(inode core.INode, frustum *math32.Frustum, zL
 		}
 	}
 	// Classify children
-	for _, ichild := range inode.Children() {
-		r.classifyAndCull(ichild, frustum, zLayer)
+	if drawChildren {
+		for _, ichild := range inode.Children() {
+			r.classifyAndCull(ichild, frustum, zLayer)
+		}
 	}
 }
 
